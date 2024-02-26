@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  
+    <title>LogModFM</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">LogMod</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="Index.html">Inicio</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="Moldes.html">Moldes por cliente</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="Ubicacion.html">Ubicacion</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="Seguimiento.html">Seguimiento</a>
+                  </li>
+                 
+                </ul>
+              </div>
+            </div>
+          </nav>
+    </div>
+ <div class="container">
+    <input
+        class="form-control mb-4 my-5"
+        id="tableSearch"
+        type="text"
+        placeholder="Busqueda personalizada....."
+      />
+     
+    <div class="container">
+      <h4 class="my-5">Moldes en proceso : </h4>
+    </div>
+    <div  id="admin2">
+      <div id="tab2" class="container my-5"></div>
+    </div>
+  
+
+    <div class="container">
+      <h4 class="my-5">Moldes guardadados recientemente: </h4>
+    </div>
+    <div  id="admin3">
+      <div id="tab3" class="container my-5"></div>
+    </div>
+    
+  </div>
+   
+  <script src="JS/App.js"></script>
+    
+</body>
+</html>
