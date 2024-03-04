@@ -167,8 +167,7 @@ function reubicacion(){
     
     var Nomodelo = document.getElementById("nmodelo").value;
     var Area = document.getElementById("area").value;
-    var Entrega = document.getElementById("entrega").value;
-    var Recibe = document.getElementById("recibe").value;
+    var Entrega = document.getElementById("diponibilidad").value;
     var Fecha = document.getElementById("fecha").value;
     
    
@@ -181,7 +180,6 @@ function reubicacion(){
           Nomodelo: Nomodelo,
           Area: Area,
           Entrega: Entrega,
-          Recibe: Recibe,
           Fecha: Fecha,
       }) 
       .then((docRef) => {
@@ -277,7 +275,7 @@ db.collection("Producción").orderBy('Fecha', 'desc')
 
 
 var tab3 = document.getElementById("tab3");
-db.collection("Ubicacion de modelos por cliente").orderBy('Fecha', 'asc')
+db.collection("Ubicacion de modelos por cliente").orderBy('Fecha', 'desc')
 .get()
 .then((querySnapshot) => {
   tab3.innerHTML = "";
@@ -289,27 +287,30 @@ db.collection("Ubicacion de modelos por cliente").orderBy('Fecha', 'asc')
     <table  class="table table-dark table-success table-hover  table-bordered">
 
     <tr>
-    <th scope="col">Cliente</th>
-    <th scope="col">Nombre del modelo</th>
-    <th scope="col">Almacen</th>
-    <th scope="col">Ubicación</th>
-    <th scope="col">Fecha de guardado</th>
+    <th scope="col">${doc.data().Cliente}</th>
+   
+    
+    <th scope="col">${doc.data().Almacen}</th>
+    <th scope="col">UBICACIÓN DENTRO DEL ALMACEN</th>
+    <th scope="col">FECHA DE GUARDADO</th>
+    <th scope="col"><button class="btn btn-danger" onclick="Borrar('${
+      doc.id
+    }');">Eliminar</button></th>
+    <th scope="col"><button  class="btn btn-warning" onclick="Editar('${doc.id}','${
+      doc.data().Cliente
+    }','${doc.data().Nomodelo}','${doc.data().PDM}','${doc.data().Almacen}','${doc.data().Ubicacion}','${doc.data().Fecha}')">Editar</button}</th>
    
    
    
   </tr>
 
-<tr onclick="Editar('${doc.id}','${
-doc.data().Cliente
-}','${doc.data().Nomodelo}')">
+<tr>
 
-<td  scope="row">${doc.data().Cliente}</td>
+<td  scope="row">${doc.data().Nomodelo}</td>
+
 
 <td>
-<p>${doc.data().Nomodelo}</p>
-</td>
-<td>
-<p>${doc.data().Almacen}</p>
+<p>${doc.data().PDM}</p>
 </td>
 <td>
 <p>${doc.data().Ubicacion}</p>
@@ -317,7 +318,118 @@ doc.data().Cliente
 <td>
 <p>${doc.data().Fecha}</p>
 </td>
+
+<td></td>
+<td></td>
+
 </tr>
+
+      
+      </table>
+      </div>
+
+         
+      `;
+  });
+});
+
+function Borrar(id) {
+  db.collection("Ubicacion de modelos por cliente")
+    .doc(id)
+    .delete()
+    .then(() => {
+      alert("Registro borrado exitosamente!");
+      window.location.href = "Ubicacion.html";
+    })
+    .catch((error) => {
+      alert("Error al borrar el registro: ", error);
+    });
+}
+
+function Editar(id, Cliente, Nmodelo, PDM, Almacen, Ubicacion, Fecha) {
+  document.getElementById("cliente").value = Cliente;
+  document.getElementById("nmodelo").value = Nmodelo;
+  document.getElementById("almacen").value = Almacen;
+  document.getElementById("pdm").value = PDM;
+  document.getElementById("ubicacion").value = Ubicacion;
+  document.getElementById("fecha").value = Fecha;
+
+
+  var btn = document.getElementById("btn-registrar");
+  btn.innerHTML = "Actualizar";
+
+  btn.onclick = function () {
+    var Ref = db.collection("Ubicacion de modelos por cliente").doc(id);
+    window.location.href="#location";
+    var Cliente = document.getElementById("cliente").value;
+  var Nomodelo = document.getElementById("nmodelo").value;
+  var PDM = document.getElementById("pdm").value;
+  var Almacen = document.getElementById("almacen").value;
+  var Ubicacion = document.getElementById("ubicacion").value;
+  var Fecha = document.getElementById("fecha").value;
+    return Ref.update({
+      Cliente: Cliente,
+          Nomodelo: Nomodelo,
+          PDM: PDM,
+          Almacen: Almacen,
+          Ubicacion: Ubicacion,
+          Fecha: Fecha,
+    })
+      .then(() => {
+        alert("Registro actualizado correctamente!");
+
+        btn.innerHTML = "Guardar";
+      
+        window.location.href = "Ubicacion.html";
+      })
+      .catch((error) => {
+        
+        alert("Error al actualizar el registro: ", error);
+      });
+  };
+}
+
+var tab4 = document.getElementById("tab4");
+db.collection("Ubicacion de modelos por cliente").orderBy('Fecha', 'desc')
+.get()
+.then((querySnapshot) => {
+  tab4.innerHTML = "";
+  querySnapshot.forEach((doc) => {
+    console.log(`${doc.id} => ${doc.data()}`);
+    tab4.innerHTML += `
+     
+    <div  class="table-responsive">
+    <table  class="table table-dark table-success table-hover  table-bordered">
+
+    <tr>
+    <th scope="col">${doc.data().Cliente}</th>
+   
+    
+    <th scope="col">${doc.data().Almacen}</th>
+    <th scope="col">UBICACIÓN DENTRO DEL ALMACEN</th>
+    <th scope="col">FECHA DE GUARDADO</th>
+
+   
+   
+   
+  </tr>
+
+<tr>
+
+<td  scope="row">${doc.data().Nomodelo}</td>
+
+
+<td>
+<p>${doc.data().PDM}</p>
+</td>
+<td>
+<p>${doc.data().Ubicacion}</p>
+</td>
+<td>
+<p>${doc.data().Fecha}</p>
+</td>
+
+
 
       
       </table>
