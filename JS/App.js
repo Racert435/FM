@@ -135,7 +135,13 @@ function reubicacion(){
       .then((docRef) => {
         
           alert("Registro guardado exitosamente", docRef.id);
-          window.location.href = "Ubicacion.html";
+          document.getElementById("cliente").value="";
+          document.getElementById("nmodelo").value="";
+          document.getElementById("pdm").value="";
+          document.getElementById("almacen").value="";
+          document.getElementById("ubicacion").value="";
+          document.getElementById("fecha").value="";
+          
 
 
         
